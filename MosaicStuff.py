@@ -25,22 +25,17 @@ import matplotlib.pyplot as plt
 hafiles = glob.glob('*_ha*')
 hafiles = set(hafiles) - set(glob.glob("*.*"))
 for it in hafiles:
-    print it
     t = it.split('_')
+    print "Running Sextractor on",t[0]
     ir = t[0]+'_R'
-    print '/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat'
-    print ""
     os.system('/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat')
-    print ""
-    print "/usr/bin/sextractor " + it + '.coadd.fits,' + ir + '.coadd.fits -c default.sex.hdi'
-    print ""
-    os.system('/usr/bin/sextractor ' + it + '.coadd.fits,' + ir + '.coadd.fits -c default.sex.hdi')
+    os.system('/usr/bin/sextractor ' + it + '.coadd.fits,' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat')
 # Catalogs made
 
 
 # In[9]:
 
-cluster = ""
+cluster = "A1367"
 hacat = glob.glob(cluster + "_ha*.cat")
 rcat = glob.glob(cluster + "_R.cat")
 try:
