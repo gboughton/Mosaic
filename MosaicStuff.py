@@ -32,7 +32,7 @@ for it in hafiles:
     print ""
     os.system('/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat')
     print ""
-    print "/usr/bin/sextractor " + it + '.coadd.fits, ' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat')"
+    print "/usr/bin/sextractor " + it + '.coadd.fits, ' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat'
     print ""
     os.system('/usr/bin/sextractor ' + it + '.coadd.fits, ' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat')
 # Catalogs made
