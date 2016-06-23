@@ -27,12 +27,12 @@ hafiles = set(hafiles) - set(glob.glob("*.*"))
 for it in hafiles:
     print it
     t = it.split('_')
-    os.system('/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat')
-    os.system('/usr/bin/sextractor ' + it + '.coadd.fits, ' + t[0] + '_R.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + t[0] + '_R.cat')
+    os.system('/usr/bin/sextractor ' + t[0] + '_R.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + t[0] + '_R.cat')
+    os.system('/usr/bin/sextractor ' + t[0] + '_R.coadd.fits, ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '_R.cat')
 # Catalogs made
 
 
-# In[5]:
+# In[9]:
 
 cluster = ""
 hacat = glob.glob(cluster + "_ha*.cat")
@@ -45,13 +45,13 @@ except IndexError:
     sys.exit(0)
 hadat = fits.getdata(hacat,2)
 rdat = fits.getdata(rcat,2)
-haflux = hadat["FLX"] #Not right column name
-rflux = rdat["FLX"]
+haflux = hadat["FLUX_AUTO"] #Not right column name
+rflux = rdat["FLUX_AUTO"]
 hflags = hadat["FLAGS"]
 rflags = rdat["FLAGS"]
 print "Number of Points found:",len(rflags)
 keepflag = np.ones(len(rflags),dtype = bool)
-for i in range(len(rflags)):
+for i in range(len(hflags)-1):
     if (rflags[i]+hflags[i])>0:
         keepflag[i] = False
 rgflx = rflux[keepflag]
@@ -94,6 +94,40 @@ print keepflag
 print hd[keepflag]
 print rd[keepflag]
 # Should be [False, True, False, False, False, False, False, True, False, True]
+
+
+# In[6]:
+
+cluster = "A1367"
+hacat = glob.glob(cluster + "_ha*.cat")
+rcat = glob.glob(cluster + "_R.cat")
+try:
+    hacat = hacat[0]
+    rcat = rcat[0]
+except IndexError:
+    print "No catalogs found"
+    sys.exit(0)
+hadat = fits.getdata(hacat,2)
+rdat = fits.getdata(rcat,2)
+hadat.columns
+
+
+# In[8]:
+
+for i in range(4):
+    print i
+
+
+# In[10]:
+
+rflags = rdat["FLAGS"]
+rflags[6]
+
+
+# In[11]:
+
+print len(hflags)
+print len(rflags)
 
 
 # In[ ]:
