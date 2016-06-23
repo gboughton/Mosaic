@@ -27,8 +27,9 @@ hafiles = set(hafiles) - set(glob.glob("*.*"))
 for it in hafiles:
     print it
     t = it.split('_')
-    os.system('/usr/bin/sextractor ' + t[0] + '_R.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + t[0] + '_R.cat')
-    os.system('/usr/bin/sextractor ' + t[0] + '_R.coadd.fits, ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '_R.cat')
+    ir = t[0]+'_R'
+    os.system('/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat')
+    os.system('/usr/bin/sextractor ' + it + '.coadd.fits, ' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat')
 # Catalogs made
 
 
