@@ -28,7 +28,12 @@ for it in hafiles:
     print it
     t = it.split('_')
     ir = t[0]+'_R'
+    print "os.system('/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat')"
+    print "/n"
     os.system('/usr/bin/sextractor ' + it + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + it + '.cat')
+    print "/n"
+    print "os.system('/usr/bin/sextractor ' + it + '.coadd.fits, ' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat')"
+    print "/n"
     os.system('/usr/bin/sextractor ' + it + '.coadd.fits, ' + ir + '.coadd.fits -c default.sex.hdi -CATALOG_NAME ' + ir + '.cat')
 # Catalogs made
 
